@@ -25,6 +25,11 @@ public class SignInRequest extends Request {
         }
     }
 
+    @Override
+    public String getRequestMethod() {
+        return "POST";
+    }
+
     private String buildSignInURL() {
         return String.format("%s&apikey=%s",
                 DBHandler.getSignInLink(), DBHandler.getAnonKey());

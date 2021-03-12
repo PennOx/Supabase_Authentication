@@ -25,6 +25,11 @@ public class SignOutRequest extends Request {
         }
     }
 
+    @Override
+    public String getRequestMethod() {
+        return "POST";
+    }
+
     private String buildSignOutURL() {
         return String.format("%s?apikey=%s&Content-Type=application/json&Authorization=%s",
                 DBHandler.getSignOutLink(), DBHandler.getAnonKey(), AccountsManager.getAccessToken());

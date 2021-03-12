@@ -18,4 +18,6 @@ public abstract class Request {
     }
 
     public abstract URL getURL();
+
+    public abstract String getRequestMethod();
 }

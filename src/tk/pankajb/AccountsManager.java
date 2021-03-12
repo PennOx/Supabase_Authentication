@@ -24,7 +24,7 @@ public class AccountsManager {
         }
     }
 
-    public static void setCurrentUser(User currentUser, String accessToken) {
+    public static void signInUserFromToken(User currentUser, String accessToken) {
         AccountsManager.currentUser = currentUser;
         AccountsManager.accessToken = accessToken;
     }
@@ -50,7 +50,7 @@ public class AccountsManager {
     }
 
     public static void signOutAccount() {
-        setCurrentUser(null, null);
+        signInUserFromToken(null, null);
         UI.successSignOut();
     }
 

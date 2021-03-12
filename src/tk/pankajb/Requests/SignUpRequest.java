@@ -26,6 +26,11 @@ public class SignUpRequest extends Request {
         }
     }
 
+    @Override
+    public String getRequestMethod() {
+        return "POST";
+    }
+
     private String buildSignUpURL() {
         return String.format("%s?apikey=%s",
                 DBHandler.getSignUpLink(), DBHandler.getAnonKey());

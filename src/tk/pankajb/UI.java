@@ -4,6 +4,7 @@ import tk.pankajb.Exceptions.UserNotFoundException;
 import tk.pankajb.Requests.AuthBody;
 import tk.pankajb.Responses.User;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class UI {
@@ -13,11 +14,8 @@ public class UI {
         Scanner scan = new Scanner(System.in);
 
         if (AccountsManager.isSignedIn()) {
-            printLine();
-            System.out.println("0:- Exit");
-            System.out.println("1:- User details");
-            System.out.println("2:- Sign out");
-            printLine();
+
+            printSignedUserOptions();
 
             switch (Integer.parseInt(scan.nextLine())) {
                 case 0:
@@ -38,11 +36,7 @@ public class UI {
             }
 
         } else {
-            printLine();
-            System.out.println("0:- Exit");
-            System.out.println("1:- Create Account");
-            System.out.println("2:- Access Account");
-            printLine();
+            printUnSignedUserOption();
 
             switch (Integer.parseInt(scan.nextLine())) {
                 case 0:
@@ -60,6 +54,22 @@ public class UI {
         }
 
         startUI();
+    }
+
+    private static void printUnSignedUserOption() {
+        printLine();
+        System.out.println("0:- Exit");
+        System.out.println("1:- Create Account");
+        System.out.println("2:- Access Account");
+        printLine();
+    }
+
+    private static void printSignedUserOptions() {
+        printLine();
+        System.out.println("0:- Exit");
+        System.out.println("1:- User details");
+        System.out.println("2:- Sign out");
+        printLine();
     }
 
     private static void printCurrentUserDetails() throws UserNotFoundException {
@@ -102,13 +112,13 @@ public class UI {
         System.out.println("------------------------------------------");
     }
 
-    public static void successSignIn() {
+    public static void printSuccessSignIn() {
         printLine();
         System.out.println("Sign in success");
         printLine();
     }
 
-    public static void successSignUp() {
+    public static void printSuccessSignUp() {
         printLine();
         System.out.println("Sign up success");
         System.out.println("Verification link sent to your mail.");
@@ -120,5 +130,10 @@ public class UI {
         printLine();
         System.out.println("Sign out success");
         printLine();
+    }
+
+    public static void printError(Connection connection) throws IOException {
+        System.err.print("Error code = " + connection.getResponseCode());
+        System.err.print("Error Msg = " + connection.getResponseMessage());
     }
 }
