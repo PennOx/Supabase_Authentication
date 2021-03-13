@@ -1,7 +1,10 @@
 package tk.pankajb.Requests;
 
 import com.google.gson.Gson;
+import tk.pankajb.Connection;
+import tk.pankajb.Responses.ResponseManager;
 
+import java.io.IOException;
 import java.net.URL;
 
 public abstract class Request {
@@ -20,4 +23,8 @@ public abstract class Request {
     public abstract URL getURL();
 
     public abstract String getRequestMethod();
+
+    public abstract Connection getConnection() throws IOException;
+
+    public abstract ResponseManager getResponseManager();
 }

@@ -1,6 +1,7 @@
 package tk.pankajb;
 
 import com.google.gson.Gson;
+import tk.pankajb.Requests.SignInRequest;
 import tk.pankajb.Responses.ResponseManager;
 import tk.pankajb.Responses.SignInResponse.Response;
 
@@ -9,23 +10,24 @@ import java.io.IOException;
 public class SignInResponseManager implements ResponseManager {
 
     Response response;
-    Connection connection;
+    SignInRequest request;
 
     private SignInResponseManager() {
         // Preventing from creating empty object
     }
 
-    private SignInResponseManager(Connection connection) {
-        this.connection = connection;
+    private SignInResponseManager(SignInRequest request) {
+        this.request = request;
     }
 
-    public static ResponseManager getResponseManagerOf(Connection connection) {
-        return new SignInResponseManager(connection);
+    public static SignInResponseManager getResponseManagerOf(SignInRequest request) {
+        return new SignInResponseManager(request);
     }
 
     @Override
     public void processResponse() throws IOException {
 
+        Connection connection = request.getConnection();
         String jsonResponse = connection.getResponseInJSON();
         response = getResponseFromJSON(jsonResponse);
         signInUser();

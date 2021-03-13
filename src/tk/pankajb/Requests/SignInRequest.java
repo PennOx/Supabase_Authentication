@@ -1,11 +1,18 @@
 package tk.pankajb.Requests;
 
+import tk.pankajb.Connection;
 import tk.pankajb.DBHandler;
+import tk.pankajb.Responses.ResponseManager;
+import tk.pankajb.SignInResponseManager;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class SignInRequest extends Request {
+
+    private Connection connection;
+    private SignInResponseManager responseManager;
 
     public SignInRequest(AuthBody auth) {
         super(auth);
@@ -28,6 +35,31 @@ public class SignInRequest extends Request {
     @Override
     public String getRequestMethod() {
         return "POST";
+    }
+
+    @Override
+    public Connection getConnection() throws IOException {
+        if (!hasConnection()) {
+            connection = Connection.getNewConnectionOf(this);
+        }
+        return connection;
+    }
+
+    @Override
+    public ResponseManager getResponseManager() {
+        if (!hasResponseManager()) {
+            responseManager = SignInResponseManager.getResponseManagerOf(this);
+        }
+
+        return responseManager;
+    }
+
+    private boolean hasResponseManager() {
+        return responseManager != null;
+    }
+
+    private boolean hasConnection() {
+        return connection != null;
     }
 
     private String buildSignInURL() {
