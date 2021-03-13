@@ -3,7 +3,7 @@ package tk.pankajb.Requests;
 import tk.pankajb.Connection;
 import tk.pankajb.DBHandler;
 import tk.pankajb.Responses.ResponseManager;
-import tk.pankajb.SignUpResponseManager;
+import tk.pankajb.Responses.SignUpResponseManager;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -19,18 +19,10 @@ public class SignUpRequest extends Request {
     }
 
     @Override
-    public URL getURL() {
-        try {
+    public URL getURL() throws MalformedURLException {
 
-            return new URL(buildSignUpURL());
+        return new URL(buildSignUpURL());
 
-        } catch (MalformedURLException e) {
-
-            e.printStackTrace();
-            System.exit(1);
-            return null;
-
-        }
     }
 
     @Override

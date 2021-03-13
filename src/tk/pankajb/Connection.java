@@ -23,7 +23,9 @@ public class Connection {
     }
 
     public static Connection getNewConnectionOf(Request request) throws IOException {
-        return new Connection(request);
+        Connection connection = new Connection(request);
+        connection.writeAuthData();
+        return connection;
     }
 
     private void setupConnection() throws IOException {

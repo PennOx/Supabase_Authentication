@@ -4,56 +4,61 @@ import tk.pankajb.Exceptions.UserNotFoundException;
 import tk.pankajb.Requests.AuthBody;
 import tk.pankajb.Responses.User;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class UI {
 
     public static void startUI() {
 
-        Scanner scan = new Scanner(System.in);
-
         if (AccountsManager.isSignedIn()) {
-
             printSignedUserOptions();
-
-            switch (Integer.parseInt(scan.nextLine())) {
-                case 0:
-                    System.exit(0);
-                    break;
-                case 1:
-                    try {
-                        printCurrentUserDetails();
-                    } catch (UserNotFoundException e) {
-                        printError(e.getMessage());
-                    }
-                    break;
-                case 2:
-                    AccountsManager.signOutAccount();
-                    break;
-                default:
-                    System.out.println("\nChoose valid option\n");
-            }
+            getSignedUserInput();
 
         } else {
             printUnSignedUserOption();
+            getUnSignedUserInput();
 
-            switch (Integer.parseInt(scan.nextLine())) {
-                case 0:
-                    System.exit(0);
-                    break;
-                case 1:
-                    AccountsManager.signUpAccount();
-                    break;
-                case 2:
-                    AccountsManager.signInAccount();
-                    break;
-                default:
-                    System.out.println("\nChoose valid option\n");
-            }
         }
 
         startUI();
+    }
+
+    private static void getUnSignedUserInput() {
+        Scanner scan = new Scanner(System.in);
+        switch (Integer.parseInt(scan.nextLine())) {
+            case 0:
+                System.exit(0);
+                break;
+            case 1:
+                AccountsManager.signUpAccount();
+                break;
+            case 2:
+                AccountsManager.signInAccount();
+                break;
+            default:
+                System.out.println("\nChoose valid option\n");
+        }
+    }
+
+    private static void getSignedUserInput() {
+        Scanner scan = new Scanner(System.in);
+        switch (Integer.parseInt(scan.nextLine())) {
+            case 0:
+                System.exit(0);
+                break;
+            case 1:
+                try {
+                    printCurrentUserDetails();
+                } catch (UserNotFoundException e) {
+                    printError(e.getMessage());
+                }
+                break;
+            case 2:
+                AccountsManager.signOutAccount();
+                break;
+            default:
+                System.out.println("\nChoose valid option\n");
+        }
     }
 
     private static void printUnSignedUserOption() {
@@ -132,8 +137,9 @@ public class UI {
         printLine();
     }
 
-    public static void printError(Connection connection) throws IOException {
-        System.err.print("Error code = " + connection.getResponseCode());
-        System.err.print("Error Msg = " + connection.getResponseMessage());
+    public static void printKeyOrLinkNotFound() {
+        printLine();
+        System.out.println("Anon key or Database link not found.");
+        printLine();
     }
 }

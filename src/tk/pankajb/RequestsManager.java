@@ -11,7 +11,6 @@ public class RequestsManager {
 
         try {
             Connection connection = request.getConnection();
-            connection.writeAuthData();
 
             if (isConnectionResponseOK(connection)) {
 
@@ -19,7 +18,7 @@ public class RequestsManager {
                 responseManager.processResponse();
 
             } else {
-                UI.printError(connection);
+                throw new IOException(connection.getResponseMessage());
 
             }
 

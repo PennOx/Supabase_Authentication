@@ -5,6 +5,7 @@ import tk.pankajb.Connection;
 import tk.pankajb.Responses.ResponseManager;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public abstract class Request {
@@ -20,7 +21,7 @@ public abstract class Request {
         return gson.toJson(auth);
     }
 
-    public abstract URL getURL();
+    public abstract URL getURL() throws MalformedURLException;
 
     public abstract String getRequestMethod();
 

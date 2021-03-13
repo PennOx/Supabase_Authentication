@@ -1,9 +1,10 @@
-package tk.pankajb;
+package tk.pankajb.Responses;
 
 import com.google.gson.Gson;
+import tk.pankajb.Connection;
 import tk.pankajb.Requests.SignUpRequest;
-import tk.pankajb.Responses.ResponseManager;
 import tk.pankajb.Responses.SignUpResponse.Response;
+import tk.pankajb.UI;
 
 import java.io.IOException;
 

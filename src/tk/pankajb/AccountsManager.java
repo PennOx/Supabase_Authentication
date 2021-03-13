@@ -36,7 +36,6 @@ public class AccountsManager {
         return null;
     }
 
-
     public static void signUpAccount() {
         AuthBody auth = UI.requestCredentials();
         Request request = new SignUpRequest(auth);

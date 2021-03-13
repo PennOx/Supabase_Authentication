@@ -4,7 +4,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        UI.startUI();
+        if (DBHandler.hasAnonKeyAndDbLink()) {
+            UI.startUI();
+        } else {
+            UI.printKeyOrLinkNotFound();
+        }
 
     }
 }

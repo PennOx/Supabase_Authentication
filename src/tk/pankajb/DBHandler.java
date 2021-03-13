@@ -23,4 +23,7 @@ public class DBHandler {
         return anonKey;
     }
 
+    public static boolean hasAnonKeyAndDbLink() {
+        return !anonKey.isEmpty() && !databaseLink.isEmpty();
+    }
 }
